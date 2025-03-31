@@ -1,5 +1,6 @@
 ﻿using System.Net.Mime;
 using System.Threading;
+using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ namespace Soenneker.Controllers.Health;
 /// based on the environment.
 /// </summary>
 [ApiController]
+[ApiVersion("1")]
 [Route("")]
 public sealed class HealthController : BaseController
 {
