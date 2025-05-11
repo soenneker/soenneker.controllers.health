@@ -14,6 +14,7 @@ namespace Soenneker.Controllers.Health;
 /// Provides a health check endpoint to verify if the service is online. Returns a message indicating the API status
 /// based on the environment.
 /// </summary>
+[ApiExplorerSettings(IgnoreApi = true)]
 [ApiController]
 [ApiVersion("1")]
 [Route("")]
