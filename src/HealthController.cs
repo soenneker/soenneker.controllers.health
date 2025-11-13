@@ -17,7 +17,7 @@ namespace Soenneker.Controllers.Health;
 [ApiExplorerSettings(IgnoreApi = true)]
 [ApiController]
 [ApiVersion("1")]
-[Route("")]
+[Route("health")]
 public sealed class HealthController : BaseController
 {
     public HealthController(IConfiguration config) : base(config)
