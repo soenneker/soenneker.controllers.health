@@ -27,7 +27,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Soenneker.Controllers.Health.csproj" />
+        <ProjectReference Include="..\..\src\Soenneker.Controllers.Health\Soenneker.Controllers.Health.csproj" />
     </ItemGroup>
 
     <ItemGroup>
