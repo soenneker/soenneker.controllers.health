@@ -3,11 +3,26 @@
 [![](https://img.shields.io/nuget/dt/soenneker.controllers.health.svg?style=for-the-badge)](https://www.nuget.org/packages/soenneker.controllers.health/)
 [![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.controllers.health/codeql.yml?label=CodeQL&style=for-the-badge)](https://github.com/soenneker/soenneker.controllers.health/actions/workflows/codeql.yml)
 
-# ![](https://user-images.githubusercontent.com/4441470/224455560-91ed3ee7-f510-4041-a8d2-3fc093025112.png) Soenneker.Controllers.Health
-### HealthController provides a public, anonymous-accessible HTTP GET endpoint that returns a simple health check response indicating if the API is online
+# Soenneker.Controllers.Health
 
-## Installation
+Provides a health check endpoint to verify if the service is online. Returns a message indicating the API status based on the environment.
 
-```
+## Install
+
+```bash
 dotnet add package Soenneker.Controllers.Health
 ```
+
+## What you get
+
+- `HealthController` — Provides a health check endpoint to verify if the service is online. Returns a message indicating the API status based on the environment.
+
+## API at a glance
+
+| API | What it does | Result / important behavior |
+| --- | --- | --- |
+| `HealthController.Health(cancellationToken)` | Checks the health status of the API and returns a response indicating whether it is online. | Returns a 200 OK response with a health message if in development or local environment; otherwise, returns a 200 OK without a message. |
+
+## Practical notes
+
+- Cancellation stops pending work; it does not undo work that has already completed.
