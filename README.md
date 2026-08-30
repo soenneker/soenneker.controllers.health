@@ -5,7 +5,7 @@
 
 # Soenneker.Controllers.Health
 
-Provides a health check endpoint to verify if the service is online. Returns a message indicating the API status based on the environment.
+Adds an anonymous MVC liveness endpoint at `GET /health`.
 
 ## Install
 
@@ -13,16 +13,37 @@ Provides a health check endpoint to verify if the service is online. Returns a m
 dotnet add package Soenneker.Controllers.Health
 ```
 
-## What you get
+## Register the controller
 
-- `HealthController` — Provides a health check endpoint to verify if the service is online. Returns a message indicating the API status based on the environment.
+```csharp
+using Soenneker.Controllers.Health;
 
-## API at a glance
+builder.Services
+    .AddControllers()
+    .AddApplicationPart(typeof(HealthController).Assembly);
+```
 
-| API | What it does | Result / important behavior |
-| --- | --- | --- |
-| `HealthController.Health(cancellationToken)` | Checks the health status of the API and returns a response indicating whether it is online. | Returns a 200 OK response with a health message if in development or local environment; otherwise, returns a 200 OK without a message. |
+Map controllers in the normal ASP.NET Core pipeline:
+
+```csharp
+app.MapControllers();
+```
+
+## Response
+
+```http
+GET /health
+```
+
+The endpoint always returns `200 OK` when the application can execute the controller:
+
+- When configuration key `Environment` is `Local` or `Development`, the JSON response body is `"API is online"`.
+- For every other value, including a missing value, the response has no body.
+
+The controller declares API version `1` through ASP.NET API Versioning, but its route contains no version segment. The host's configured API-version reader determines whether callers must supply a version.
 
 ## Practical notes
 
-- Cancellation stops pending work; it does not undo work that has already completed.
+- This is a liveness signal only. It does not check databases, queues, downstream APIs, disk, or application readiness.
+- The endpoint is marked `AllowAnonymous` and excluded from API Explorer.
+- If an orchestrator needs readiness or dependency checks, use ASP.NET Core Health Checks alongside or instead of this controller.

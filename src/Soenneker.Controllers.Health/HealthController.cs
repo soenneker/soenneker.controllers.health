@@ -1,5 +1,4 @@
 ﻿using System.Net.Mime;
-using System.Threading;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -27,17 +26,12 @@ public sealed class HealthController : BaseController
     /// <summary>
     /// Checks the health status of the API and returns a response indicating whether it is online.
     /// </summary>
-    /// <param name="cancellationToken">Used to signal cancellation of the operation if needed.</param>
-    /// <returns>Returns a 200 OK response with a health message if in development or local environment; otherwise, returns a 200
-    /// OK without a message.</returns>
+    /// <returns>A 200 response with a short message in local or development environments; otherwise, an empty 200 response.</returns>
     [HttpGet]
-    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status400BadRequest)]
-    [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [Produces(MediaTypeNames.Application.Json)]
-    [Consumes(MediaTypeNames.Application.Json)]
     [AllowAnonymous]
-    public IActionResult Health(CancellationToken cancellationToken)
+    public IActionResult Health()
     {
         string? environment = Config["Environment"];
 
