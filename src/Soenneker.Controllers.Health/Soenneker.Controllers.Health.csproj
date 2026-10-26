@@ -46,6 +46,6 @@
 
     <ItemGroup>
         <PackageReference Include="Soenneker.Controllers.Base" Version="11.0.87" />
-        <PackageReference Include="Soenneker.Enums.DeployEnvironment" Version="11.0.261" />
+        <PackageReference Include="Soenneker.Enums.DeployEnvironment" Version="11.0.262" />
     </ItemGroup>
 </Project>
